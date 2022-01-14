@@ -1,35 +1,36 @@
 const music = document.querySelector('audio')
 const buttonPlay = document.querySelector('.button-play')
 const buttonPause = document.querySelector('.button-pause')
-const progress = document.querySelector('progress')
 const bar = document.querySelector('.barra')
-const timeStart = document.querySelector('.inicio')
 const duracaoTotal = document.querySelector('.fim')
-const img = document.querySelector('img')
-const nomeMusic = document.querySelector('.descricao h2')
-const nomeArtist = document.querySelector('.descricao i')
 let indexMusic = 0
 
 
 //array
 const arrayMusic = [
     {
-        titulo: 'Piano',
-        nome: 'João Guilherme',
-        src: 'musics/A Brand New Start - TrackTribe (1).mp3',
-        img: 'imgs/piano.jpg'
+        titulo: 'Um dia a gente se encontra',
+        nome: 'Charlie Brown',
+        src: 'musics/charlie brown.mp3',
+        img: 'imgs/charlie.jpg'
     },
     {
-        titulo: 'GuitarSolo',
-        nome: 'Slash',
-        src: 'musics/We Ride! - Reed Mathis.mp3',
-        img: 'imgs/rock.jpg'
+        titulo: 'Tempo Perdido',
+        nome: 'Legião Urbana',
+        src: 'musics/tempo perdido.mp3',
+        img: 'imgs/legiao.jpg'
     },
     {
-        titulo: 'Samba',
-        nome: 'Martinho da Villa',
-        src: 'musics/projeto_spotify_parte_1_musicas_Ella Vater - The Mini Vandals.mp3',
-        img: 'imgs/samba.jpg'
+        titulo: 'Let Go',
+        nome: 'Ark Patrol',
+        src: 'musics/ArkPartrol.mp3',
+        img: 'imgs/ark.jpg'
+    },
+    {
+        titulo: 'Ainda gosto dela',
+        nome: 'Skank',
+        src: 'musics/ainda gosto dela.mp3',
+        img: 'imgs/ainda.jpg'
     }
 ]
 
@@ -46,7 +47,7 @@ music.addEventListener('timeupdate', attBar)
 document.querySelector('.anterior').addEventListener('click', () => {
     indexMusic--
     if (indexMusic < 0) {
-        indexMusic = 2
+        indexMusic = 3
     }
     renderizarMusic(indexMusic)
 music.play() 
@@ -54,7 +55,7 @@ music.play()
 
 document.querySelector('.proxima').addEventListener('click', () => {
     indexMusic++
-    if (indexMusic > 2) {
+    if (indexMusic > 3) {
         indexMusic = 0
     }
     renderizarMusic(indexMusic)
@@ -68,8 +69,10 @@ renderizarMusic(indexMusic)
 
 // functions
 
-
 function renderizarMusic(index) {
+    const nomeMusic = document.querySelector('.descricao h2')
+    const img = document.querySelector('img')
+    const nomeArtist = document.querySelector('.descricao i')
     music.setAttribute('src', arrayMusic[index].src)
     music.addEventListener('loadeddata', () => {
         nomeMusic.textContent = arrayMusic[index].titulo
@@ -94,12 +97,14 @@ function pausarMusic() {
 }
 
 function attBar() {
+    const progress = document.querySelector('progress')
     const valueBar = Math.floor((music.currentTime/ music.duration) * 100) +'%'
     progress.style.width = valueBar
     
 }
 
 function attTime() {
+    const timeStart = document.querySelector('.inicio')
     const showTime = Math.floor(music.currentTime)
     timeStart.innerHTML = convert(showTime)
     
